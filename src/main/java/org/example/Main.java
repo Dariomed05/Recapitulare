@@ -1,16 +1,13 @@
 package org.example;
 
-public class Main {
+public class Main
+{
     public static void main(String[] args)
     {
         Scoala scoala = new Scoala();
 
-        Clasa clasa1A = new Clasa(30, NumarClasa.I, 'A');
-        Clasa clasa2B = new Clasa(25, NumarClasa.II, 'B');
-
+        Clasa clasa1A = new Clasa(67, NumarClasa.I, 'A');
         scoala.adaugaClasa("1A", clasa1A);
-        scoala.adaugaClasa("2B", clasa2B);
-
 
         Elev elev1 = new Elev("Darius", Gen.Masculin);
         Elev elev2 = new Elev("Andreea", Gen.Feminin);
@@ -18,18 +15,35 @@ public class Main {
 
         scoala.adaugaElevInClasa("1A", elev1);
         scoala.adaugaElevInClasa("1A", elev2);
-        scoala.adaugaElevInClasa("2B", elev3);
+        scoala.adaugaElevInClasa("1A", elev3);
 
-        System.out.println("Numar total clase la inceput: " + scoala.getNumarClase());
-        System.out.println("Total elevi in scoala la inceput: " + scoala.getTotalElevi());
+        Profesor profMate = new Profesor("Dl. Thor");
+        Profesor profSport = new Profesor("Dl. Messi");
+        Profesor profMuzica = new Profesor("Dna. Maria");
 
-        clasa1A.eliminaElev(elev2);
-        System.out.println("Numarul de elevi dupa eliminarea unuia dintre ei: " + scoala.getTotalElevi());
+        Activitate info = new Activitate("Programare", profMate);
+        Activitate sport = new Activitate("Fotbal", profSport);
+        Activitate cor = new Activitate("Cor", profMuzica);
 
-        scoala.eliminaElevDupaNume("Darius");
-        System.out.println("Total elevi dupa stergerea lui Darius: " + scoala.getTotalElevi());
+        scoala.adaugaActivitate("Programare", info);
+        scoala.adaugaActivitate("Fotbal", sport);
+        scoala.adaugaActivitate("Cor", cor);
 
-        scoala.eliminaClasa("1A");
-        System.out.println("Numar clase dupa stergerea clasei 1A: " + scoala.getNumarClase());
+        scoala.inscrieElevLaActivitate(elev1, "Programare");
+        scoala.inscrieElevLaActivitate(elev2, "Programare");
+        scoala.inscrieElevLaActivitate(elev1, "Fotbal");
+        scoala.inscrieElevLaActivitate(elev3, "Cor");
+
+        System.out.println("Situatia initiala: ");
+        scoala.afiseazaTopActivitati();
+        System.out.println("Elevi implicati in activitati: " + scoala.getNumarEleviCuCelPutinOActivitate());
+
+        scoala.eliminaElevDinActivitate(elev1, "Programare");
+
+        scoala.eliminaActivitate("Cor");
+
+        System.out.println("Situatia dupa eliminari: ");
+        scoala.afiseazaTopActivitati();
+        System.out.println("Elevi implicati in activitati: " + scoala.getNumarEleviCuCelPutinOActivitate());
     }
 }
